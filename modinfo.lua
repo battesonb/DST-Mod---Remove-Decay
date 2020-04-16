@@ -1,21 +1,20 @@
 name = "Remove Decay"
-version = "1.0.0"
+version = "1.1.0"
 author = "Byron Batteson"
-description = "Version: "..version.."\n"..
+description = "[i]version "..version.."[/i]\n"..
 [[
 
-This mod allows you to tweak the decay on various items in the game.
+This mod allows you to toggle whether various items in the game decay. This can either provide relief from some of the worries while playing or it can result in making the game extremely easy. It is up to you to tweak it.
 
-This can either provide relief from some of the worries while playing or it can result in making the game extremely easy. It is up to you to tweak it.
-
-Current items
-=================
-1. Lantern
+[h1]Supported items[/h1]
+1. Amulets
+2. Lantern
 3. Thermal stone
-2. Torch
+4. Torch
+5. Umbrellas
 ]]
 forumthread = ""
-api_version = 1
+api_version = 2
 icon_atlas = "modicon.xml"
 icon = "modicon.tex"
 dont_starve_compatible = true
@@ -28,6 +27,60 @@ server_filter_tags = {}
 
 configuration_options =
 {
+  {
+    name = "BLUE_AMULET_DECAY",
+    label = "Amulet decay (Blue)",
+    options = {
+      {description = "On", data = true},
+      {description = "Off", data = false},
+    },
+    default = true,
+  },
+  {
+    name = "GREEN_AMULET_DECAY",
+    label = "Amulet decay (Green)",
+    options = {
+      {description = "On", data = true},
+      {description = "Off", data = false},
+    },
+    default = true,
+  },
+  {
+    name = "ORANGE_AMULET_DECAY",
+    label = "Amulet decay (Orange)",
+    options = {
+      {description = "On", data = true},
+      {description = "Off", data = false},
+    },
+    default = true,
+  },
+  {
+    name = "PURPLE_AMULET_DECAY",
+    label = "Amulet decay (Purple)",
+    options = {
+      {description = "On", data = true},
+      {description = "Off", data = false},
+    },
+    default = true,
+  },
+  {
+    name = "RED_AMULET_DECAY",
+    label = "Amulet decay (Red)",
+    options = {
+      {description = "On", data = true},
+      {description = "Off", data = false},
+    },
+    default = true,
+  },
+  {
+    name = "YELLOW_AMULET_DECAY",
+    label = "Amulet decay (Yellow)",
+    options = {
+      {description = "On", data = true},
+      {description = "Off", data = false},
+    },
+    default = true,
+  },
   {
     name = "LANTERN_DECAY",
     label = "Lantern decay",
@@ -58,6 +111,24 @@ configuration_options =
   {
     name = "TORCH_DECAY",
     label = "Torch decay",
+    options = {
+      {description = "On", data = true},
+      {description = "Off", data = false},
+    },
+    default = true,
+  },
+  {
+    name = "GRASS_UMBRELLA_DECAY",
+    label = "Umbrella decay (Grass)",
+    options = {
+      {description = "On", data = true},
+      {description = "Off", data = false},
+    },
+    default = true,
+  },
+  {
+    name = "UMBRELLA_DECAY",
+    label = "Umbrella decay (Pig skin)",
     options = {
       {description = "On", data = true},
       {description = "Off", data = false},
