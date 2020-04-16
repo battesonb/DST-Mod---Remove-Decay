@@ -1,6 +1,8 @@
 # DST Mod - Remove Decay
 
-Don't starve together mod for selectively removing decay/fuel consumption on items.
+![](preview.png)
+
+Don't Starve Together mod for selectively removing decay/fuel consumption on items.
 
 Current items
 ================
