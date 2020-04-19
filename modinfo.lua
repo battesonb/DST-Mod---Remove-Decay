@@ -1,12 +1,12 @@
 name = "Remove Decay"
-version = "1.1.0"
+version = "1.1.1"
 author = "Byron Batteson"
-description = "[i]version "..version.."[/i]\n"..
+description = "version "..version.."\n"..
 [[
 
 This mod allows you to toggle whether various items in the game decay. This can either provide relief from some of the worries while playing or it can result in making the game extremely easy. It is up to you to tweak it.
 
-[h1]Supported items[/h1]
+Supported items
 1. Amulets
 2. Lantern
 3. Thermal stone
@@ -14,7 +14,7 @@ This mod allows you to toggle whether various items in the game decay. This can 
 5. Umbrellas
 ]]
 forumthread = ""
-api_version = 2
+api_version = 3
 icon_atlas = "modicon.xml"
 icon = "modicon.tex"
 dont_starve_compatible = true

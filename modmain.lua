@@ -24,16 +24,13 @@ for i,option in ipairs(options) do
 			end
 	
 			inst:AddTag('nodecay')
-	
-			inst:RemoveComponent("fueled")
-			inst.components.fueled = {
-				GetPercent = function() return 1 end,
-				SetPercent = function() end,
-				IsEmpty = function() return false end,
-				StopConsuming = function() end,
-				StartConsuming = function() end,
-				SetUpdateFn = function() end,
-			}
+
+			inst.components.fueled.GetPercent = function() return 1 end
+			inst.components.fueled.SetPercent = function() end
+			inst.components.fueled.IsEmpty = function() return false end
+			inst.components.fueled.StopConsuming = function() end
+			inst.components.fueled.StartConsuming = function() end
+			inst.components.fueled.SetUpdateFn = function() end
 		end
 	
 		AddPrefabPostInit(option["prefab"], RemoveDecayFunction)
