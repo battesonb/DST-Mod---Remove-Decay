@@ -1,5 +1,5 @@
 name = "Remove Decay"
-version = "1.1.3"
+version = "1.1.4"
 author = "Byron Batteson"
 description = "version "..version.."\n"..
 [[
