@@ -1,27 +1,27 @@
-_G = GLOBAL
-TUNING = _G.TUNING
-
-local fueledOptions = {
-	{ name = "BLUE_AMULET_DECAY", prefab = "blueamulet" },
-	{ name = "PURPLE_AMULET_DECAY", prefab = "purpleamulet" },
-	{ name = "YELLOW_AMULET_DECAY", prefab = "yellowamulet" },
-	{ name = "LANTERN_DECAY", prefab = "lantern" },
-	{ name = "MINER_HAT_DECAY", prefab = "minerhat" },
-	{ name = "TORCH_DECAY", prefab = "torch" },
-	{ name = "THERMAL_STONE_DECAY", prefab = "heatrock" },
-	{ name = "GRASS_UMBRELLA_DECAY", prefab = "umbrella" },
-	{ name = "UMBRELLA_DECAY", prefab = "grass_umbrella" },
+local COMPONENT = {
+	FUELED = "fueled",
+	FINITE_USES = "finiteuses",
+	PERISHABLE = "perishable",
 }
 
-for i,option in ipairs(fueledOptions) do
-	if not (GetModConfigData(option["name"])) then
-		local function RemoveFueledFunction(inst)
-			if not GLOBAL.TheWorld.ismastersim then
-				return inst
-			end
-	
-			inst:AddTag('nodecay')
+local options = {
+	{ name = "BLUE_AMULET_DECAY", prefab = "blueamulet", component = COMPONENT.FUELED },
+	{ name = "PURPLE_AMULET_DECAY", prefab = "purpleamulet", component = COMPONENT.FUELED },
+	{ name = "YELLOW_AMULET_DECAY", prefab = "yellowamulet", component = COMPONENT.FUELED },
+	{ name = "LANTERN_DECAY", prefab = "lantern", component = COMPONENT.FUELED },
+	{ name = "MINER_HAT_DECAY", prefab = "minerhat", component = COMPONENT.FUELED },
+	{ name = "TORCH_DECAY", prefab = "torch", component = COMPONENT.FUELED },
+	{ name = "THERMAL_STONE_DECAY", prefab = "heatrock", component = COMPONENT.FUELED },
+	{ name = "UMBRELLA_DECAY", prefab = "umbrella", component = COMPONENT.FUELED },
+	{ name = "GREEN_AMULET_DECAY", prefab = "greenamulet", component = COMPONENT.FINITE_USES },
+	{ name = "ORANGE_AMULET_DECAY", prefab = "orangeamulet", component = COMPONENT.FINITE_USES },
+	{ name = "RED_AMULET_DECAY", prefab = "amulet", component = COMPONENT.FINITE_USES },
+	{ name = "GRASS_UMBRELLA_DECAY", prefab = "grass_umbrella", component = COMPONENT.PERISHABLE },
+}
 
+for i,option in ipairs(options) do
+	if not (GetModConfigData(option.name)) then
+		local function PatchFueledComponent(inst)
 			inst.components.fueled.GetPercent = function() return 1 end
 			inst.components.fueled.SetPercent = function() end
 			inst.components.fueled.IsEmpty = function() return false end
@@ -30,25 +30,7 @@ for i,option in ipairs(fueledOptions) do
 			inst.components.fueled.SetUpdateFn = function() end
 		end
 
-		AddPrefabPostInit(option["prefab"], RemoveFueledFunction)
-	end
-end
-
-local finiteUsesOptions = {
-	{ name = "GREEN_AMULET_DECAY", prefab = "greenamulet" },
-	{ name = "ORANGE_AMULET_DECAY", prefab = "orangeamulet" },
-	{ name = "RED_AMULET_DECAY", prefab = "amulet" },
-}
-
-for i,option in ipairs(finiteUsesOptions) do
-	if not (GetModConfigData(option["name"])) then
-		local function RemoveFiniteUsesFunction(inst)
-			if not GLOBAL.TheWorld.ismastersim then
-				return inst
-			end
-	
-			inst:AddTag('nodecay')
-
+		local function PatchFiniteUsesComponent(inst)
 			inst.components.finiteuses.GetPercent = function() return 1 end
 			inst.components.finiteuses.SetPercent = function() end
 			inst.components.finiteuses.Use = function() end
@@ -57,6 +39,29 @@ for i,option in ipairs(finiteUsesOptions) do
 			end
 		end
 
-		AddPrefabPostInit(option["prefab"], RemoveFiniteUsesFunction)
+		local function PatchPerishable(inst)
+			inst.components.perishable.GetPercent = function() return 1 end
+			inst.components.perishable.SetPercent = function() end
+			inst.components.perishable.StartPerishing = function() end
+			inst.components.perishable.SetOnPerishFn = function() end
+		end
+
+		local function RemoveDecayFunction(inst)
+			if not GLOBAL.TheWorld.ismastersim then
+				return inst
+			end
+	
+			inst:AddTag('nodecay')
+
+			if (option.component == "fueled") then
+				PatchFueledComponent(inst)
+			elseif (option.component == "fueled") then
+				PatchFiniteUsesComponent(inst)
+			elseif (option.component == "perishable") then
+				PatchPerishable(inst)
+			end
+		end
+
+		AddPrefabPostInit(option.prefab, RemoveDecayFunction)
 	end
 end
