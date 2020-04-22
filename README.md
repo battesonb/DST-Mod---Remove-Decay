@@ -12,3 +12,7 @@ This mod allows you to toggle whether various items in the game decay. This can 
 3. Thermal stone
 4. Torch
 5. Umbrellas
+
+## Links
+
+* [Steam workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=2063145002)
