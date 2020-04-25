@@ -28,9 +28,6 @@ for i,option in ipairs(options) do
 			inst.components.finiteuses.GetPercent = function() return 1 end
 			inst.components.finiteuses.SetPercent = function() end
 			inst.components.finiteuses.Use = function() end
-			inst.components.finiteuses.SetUses = function()
-				self.current = self.total
-			end
 		end
 
 		local function PatchPerishable(inst)
